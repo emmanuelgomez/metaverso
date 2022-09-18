@@ -13,10 +13,6 @@ class App extends Component {
     return (
       <Provider store={store}>
         <div className="container" style={{marginBottom: 100}}>
-          <Basic />
-          <TextMask />
-          <Login />
-          <ReduxLogin />
           <MultiStep />
         </div>
       </Provider>

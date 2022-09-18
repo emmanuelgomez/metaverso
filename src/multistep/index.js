@@ -15,9 +15,9 @@ const renderField = ({ input, label, type, meta: { touched, error } }) => (
 function StepOne(props) {
   return (
     <div>
-      <h2> Personal</h2>
-      <Field name="firstName" component={renderField} type="text" label="First Name"/>
-      <Field name="lastName" component={renderField} type="text" label="Last Name"/>
+      <h2> Hey dear user first we need your company data</h2>
+      <Field name="Company name" component={renderField} type="text" label="Company name"/>
+      <Field name="Company industry" component={renderField} type="text" label="Company industry"/>
        <div style={{marginTop: 20}}>
           <button className='btn btn-primary' onClick={props.next}>
             Next
@@ -30,38 +30,22 @@ function StepOne(props) {
 function StepTwo(props) {
   return (
     <div>
-      <h2>Professional</h2>
-      <Field name="company" component={renderField} type="text" label="Company"/>
-      <Field name="designation" component={renderField} type="text" label="Designation"/>
+      <h2>Dear user, we can't conect to your favorite HR platform </h2>
+      <h2>So, we need to know your employee name's </h2>
+      <Field name="Employee #1" component={renderField} type="text" label="Employee #1"/>
+      <Field name="Employee #2" component={renderField} type="text" label="Employee #2"/>
       <div style={{marginTop: 20}}>
         <button className='btn' onClick={props.previous} style={{marginRight: 20}}>
           Previous
         </button>
         <button className='btn btn-primary' onClick={props.next}>
-          Next
+          Access Metaverso
         </button>
       </div>
     </div>
   )
 }
 
-function StepThree(props) {
-  return (
-    <div>
-      <h2>social</h2>
-      <Field name="twitter" component={renderField} type="text" label="Twitter"/>
-      <Field name="facebook" component={renderField} type="text" label="Facebook"/>
-      <div style={{marginTop: 20}}>
-        <button className='btn' onClick={props.previous} style={{marginRight: 20}}>
-          Previous
-        </button>
-        <button type='submit' className='btn btn-primary'>
-          Submit
-        </button>
-      </div>
-    </div>
-  )
-}
 
 class Form extends React.Component {
   constructor(props) {
@@ -71,6 +55,10 @@ class Form extends React.Component {
     }
     this.next = this.next.bind(this)
     this.previous = this.previous.bind(this)
+  }
+  redirect(e){
+      e.preventDefault()
+      window.location.replace('https://play.decentraland.org/')
   }
   next(e) {
     e.preventDefault()
@@ -84,11 +72,10 @@ class Form extends React.Component {
     const { handleSubmit } = this.props
     const {step} = this.state
     return (
-      <Example title='Multistep form'>
+      <Example title='The Place'>
         <form onSubmit={handleSubmit}>
           {step === 1 ? <StepOne {...this.props} next={this.next} /> : null}
-          {step === 2 ? <StepTwo {...this.props} next={this.next} previous={this.previous} /> : null}
-          {step === 3 ? <StepThree {...this.props} previous={this.previous}/> : null}
+          {step === 2 ? <StepTwo {...this.props} next={this.redirect} previous={this.previous} /> : null}
         </form>
       </Example>
     )
